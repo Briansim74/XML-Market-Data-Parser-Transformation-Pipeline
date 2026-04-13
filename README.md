@@ -1,3 +1,111 @@
+# XML Market Data Parser & Transformation Pipeline
+
+Financial Data Feed Handling | XML → Structured Data for Quant Systems
+
+## Overview
+This project implements a data ingestion and transformation pipeline for structured financial data, converting hierarchical XML-based datasets into normalized, tabular formats suitable for downstream quantitative analysis and trading systems.
+
+It is designed to mirror a simplified version of a market data feed handler, a critical component in trading infrastructure where structured exchange data must be parsed, validated, and made usable for pricing, risk, and execution systems.
+
+## Motivation
+In modern electronic markets, data is not directly usable in raw form. Exchanges and clearing systems often provide:
+- Deeply nested XML structures
+- Hierarchical trade and instrument data
+- Non-uniform schemas across datasets
+
+<br>
+
+Transforming this into structured, queryable data is a prerequisite for any trading or risk system.
+
+This project focuses on building that transformation layer.
+
+## Core Functionality
+### 1. XML → Tabular Conversion
+Parses hierarchical XML datasets into structured tabular formats (CSV / XLSX)
+Extracts both:
+- Data values
+- Corresponding XPath structures (schema awareness)
+
+### 2. Tabular → XML Reconstruction
+Converts flat tabular datasets back into hierarchical XML
+Supports:
+Nested structures
+Attribute handling
+Multi-record aggregation
+
+### 3. Recursive XML Parsing Engine
+Custom recursive traversal of XML trees
+Handles:
+- Deep nesting
+- Repeated nodes
+- Attribute-tagged elements
+
+### 4. Multi-Method Parsing Approaches
+Two independent parsing strategies implemented:
+- xmltodict-based parsing
+  - Converts XML → JSON → structured DataFrame
+  - Flexible and easy to manipulate
+
+- ElementTree streaming parser (XMLPullParser)
+  - Event-driven parsing for hierarchical traversal
+  - Closer to real-world low-level feed handling
+
+## Example Use Case (Trading Context)
+This system mirrors real-world workflows such as:
+- Parsing FX trade reports from clearinghouses
+- Converting exchange data feeds into structured formats
+- Preparing inputs for:
+  - Pricing models
+  - Risk engines
+  - Backtesting systems
+
+## Key Insights
+### 1. Market Data is a Structural Problem
+- The challenge is not access to data - but transforming it into usable structure.
+
+### 2. Schema Awareness is Critical
+- Capturing XPath alongside values ensures:
+  - Traceability
+  - Data integrity
+  - Compatibility with downstream systems
+
+### 3. Multiple Parsing Approaches Matter
+- Different use cases require different trade-offs:
+  - Flexibility (xmltodict) vs
+  - Performance/control (streaming parser)
+
+### 4. Foundation for Trading Systems
+- This pipeline represents the data ingestion layer in a broader trading architecture:
+
+```
+Data → Parsing → Structuring → Strategy / Risk / Execution
+```
+## System Design
+The pipeline follows a structured transformation flow:
+```
+XML Dataset
+→ Parsing Layer (recursive / streaming)
+→ Structured Representation (DataFrames)
+→ Normalization (values + XPath mapping)
+→ Output (CSV / XLSX)
+```
+
+## Technologies
+- Python
+- Pandas
+- xmltodict
+- ElementTree (XMLPullParser)
+- Recursive parsing logic
+
+## Summary
+This project demonstrates how to build a data transformation layer for structured financial datasets, bridging the gap between raw exchange-style XML feeds and structured inputs required for quantitative trading systems.
+
+</br></br></br></br>
+
+
+<details>
+<summary><strong>Detailed Implementation & Usage</strong></summary>
+
 # XML-CSV-File-Conversion
 Convert files between XML to CSV / XLSX format
 
@@ -34,3 +142,6 @@ Convert files between XML to CSV / XLSX format
 <br/>For the first method, I converted the XML file into a json format via the xmltodict library. Then, I found the XPath key that houses the relevant trade data, 'TradData'. I then created a recursive function to obtain the 'TradData' key that houses the dictionary of values of the FX data. I then created DataFrames for both the FX values and corresponding XPath addresses, then compiling the 2 DataFrames into a single XLSX file "FX_MAS_NEWT_OTHR.xlsx".
 
 <br/>For the second method, I parsed the XML file using the XMLPullParser from the ElementTree library, then iterated through the nested XPaths via XMLPullParser's event function, which allows each XPath nested addresses and values to be parsed and entered into separate DataFrames of FX values and XPath addresses. I then similarly compiled these 2 DataFrames into a single XLSX file "FX_MAS_NEWT_OTHR_ET.xlsx".
+
+</details>
+</br></br>
