@@ -1,66 +1,44 @@
-# XML Market Data Parser & Transformation Pipeline
-Financial Data Feed Handling | XML → Structured Data for Quant Systems
+# XML Market Data Parser (Structured Feed Transformation)
+A transformation engine converting hierarchical market data (XML) into structured, model-ready formats.
 
-## Overview
-A market data transformation pipeline that converts hierarchical XML financial datasets into structured, query-ready formats for quantitative trading systems.
+## Core Idea
+Market data is not directly usable - the core challenge is:
 
-The system implements a simplified data normalization layer used in market data infrastructure.
+    Transforming hierarchical structure into consistent analytical inputs
 
-## System Role
-Market Data Ingestion & Normalization Layer
+## Why this matters
+Real trading systems depend on:
+- Structured feeds from exchanges/clearinghouses
+- Schema consistency across datasets
+- Traceable data transformations
 
-Provides structured inputs for:
-- Pricing systems
-- Risk engines
-- Backtesting frameworks
+## System Mechanics
+- Recursive XML parsing
+- Structured DataFrame generation
+- Schema-preserving transformation
+- Dual parsing approaches (event-driven + object-based)
 
-## Core Functionality
-- XML → tabular transformation (DataFrame / CSV)
-- XPath-aware extraction for schema traceability
-- XML reconstruction from structured data
-- Recursive parsing of nested financial datasets
-- Streaming XML parsing for large datasets (ElementTree)
-- Flexible parsing via xmltodict pipeline
+## Key Insights
+- Structure matters more than raw data access
+- Schema consistency enables downstream correctness
+- Multiple parsing strategies reflect real engineering trade-offs
+- Transformation is a prerequisite for modeling
 
-## System Design
-```
-XML Feed
-    ↓
-Parsing Layer (Recursive / Streaming)
-    ↓
-Structured Representation (DataFrames)
-    ↓
-Normalization (Schema + XPath mapping)
-    ↓
-Output Layer (CSV / XLSX)
-```
+## Trading Interpretation
+This is the ingestion preprocessing layer for:
+- Pricing models
+- Risk systems
+- Backtesting pipelines
+- Execution simulations
 
-## Key Mechanics
-- Dual parsing architecture:
-  - Flexible dictionary-based parsing (xmltodict)
-  - Low-level streaming parser (ElementTree)
-- Schema preservation via XPath mapping
-- Recursive traversal of nested financial structures
-
-## Trading Relevance
-- Converts raw exchange-style feeds into structured inputs
-- Enables deterministic consumption by pricing and risk systems
-- Ensures schema consistency across downstream trading stack
-
-## Tech Stack
-- Python
-- Pandas
-- xmltodict
-- ElementTree
-
-## Summary
-Implements a market data normalization layer for structured transformation of XML financial datasets into quantitative trading inputs.
+## Core Insight
+If data structure is wrong, every downstream model is implicitly wrong.
 
 </br></br></br></br>
 
 
 <details>
-<summary><strong>Detailed Implementation & Usage</strong></summary>
+<summary><strong>Implementation Details & Usage</strong></summary>
 
 # XML Market Data Parser & Transformation Pipeline
 
@@ -202,6 +180,9 @@ Convert files between XML to CSV / XLSX format
 <br/>For the first method, I converted the XML file into a json format via the xmltodict library. Then, I found the XPath key that houses the relevant trade data, 'TradData'. I then created a recursive function to obtain the 'TradData' key that houses the dictionary of values of the FX data. I then created DataFrames for both the FX values and corresponding XPath addresses, then compiling the 2 DataFrames into a single XLSX file "FX_MAS_NEWT_OTHR.xlsx".
 
 <br/>For the second method, I parsed the XML file using the XMLPullParser from the ElementTree library, then iterated through the nested XPaths via XMLPullParser's event function, which allows each XPath nested addresses and values to be parsed and entered into separate DataFrames of FX values and XPath addresses. I then similarly compiled these 2 DataFrames into a single XLSX file "FX_MAS_NEWT_OTHR_ET.xlsx".
+
+</details>
+</br></br>
 
 </details>
 </br></br>
