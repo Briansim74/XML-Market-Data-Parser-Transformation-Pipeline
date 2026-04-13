@@ -1,4 +1,68 @@
 # XML Market Data Parser & Transformation Pipeline
+Financial Data Feed Handling | XML → Structured Data for Quant Systems
+
+## Overview
+A market data transformation pipeline that converts hierarchical XML financial datasets into structured, query-ready formats for quantitative trading systems.
+
+The system implements a simplified data normalization layer used in market data infrastructure.
+
+## System Role
+Market Data Ingestion & Normalization Layer
+
+Provides structured inputs for:
+- Pricing systems
+- Risk engines
+- Backtesting frameworks
+
+## Core Functionality
+- XML → tabular transformation (DataFrame / CSV)
+- XPath-aware extraction for schema traceability
+- XML reconstruction from structured data
+- Recursive parsing of nested financial datasets
+- Streaming XML parsing for large datasets (ElementTree)
+- Flexible parsing via xmltodict pipeline
+
+## System Design
+```
+XML Feed
+    ↓
+Parsing Layer (Recursive / Streaming)
+    ↓
+Structured Representation (DataFrames)
+    ↓
+Normalization (Schema + XPath mapping)
+    ↓
+Output Layer (CSV / XLSX)
+```
+
+## Key Mechanics
+- Dual parsing architecture:
+  - Flexible dictionary-based parsing (xmltodict)
+  - Low-level streaming parser (ElementTree)
+- Schema preservation via XPath mapping
+- Recursive traversal of nested financial structures
+
+## Trading Relevance
+- Converts raw exchange-style feeds into structured inputs
+- Enables deterministic consumption by pricing and risk systems
+- Ensures schema consistency across downstream trading stack
+
+## Tech Stack
+- Python
+- Pandas
+- xmltodict
+- ElementTree
+
+## Summary
+Implements a market data normalization layer for structured transformation of XML financial datasets into quantitative trading inputs.
+
+</br></br></br></br>
+
+
+<details>
+<summary><strong>Detailed Implementation & Usage</strong></summary>
+
+# XML Market Data Parser & Transformation Pipeline
 
 Financial Data Feed Handling | XML → Structured Data for Quant Systems
 
@@ -100,11 +164,7 @@ XML Dataset
 ## Summary
 This project demonstrates how to build a data transformation layer for structured financial datasets, bridging the gap between raw exchange-style XML feeds and structured inputs required for quantitative trading systems.
 
-</br></br></br></br>
 
-
-<details>
-<summary><strong>Detailed Implementation & Usage</strong></summary>
 
 # XML-CSV-File-Conversion
 Convert files between XML to CSV / XLSX format
