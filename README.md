@@ -1,4 +1,4 @@
-# XML Market Data Parser (Structured Feed Transformation)
+# XML Market Data Parser - Structured Feed Transformation
 A transformation engine converting hierarchical market data (XML) into structured, model-ready formats.
 
 ## Core Idea
