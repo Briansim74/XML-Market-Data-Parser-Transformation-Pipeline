@@ -24,7 +24,7 @@ Transforms hierarchical XML market feeds into structured datasets suitable for q
 - Parsing design affects system correctness
 - Data preprocessing is a prerequisite for any trading strategy
 
-### Dual Parsing Logic (Robustness vs Control)
+## Dual Parsing Logic (Robustness vs Control)
 - High-level parsing for flexibility (xmltodict)
 - Low-level streaming parsing for deterministic control (ElementTree)
 
